@@ -251,10 +251,10 @@ async def on_message(message):
         
     await Bot.process_commands(message)
    
-
+pas = os.environ.get("KOD")
 @Bot.command(pass_context=True)
 async def popln(ctx, user:discord.Member, p, kod):
-    if str(kod) == "f12ua":
+    if str(kod) == str(pas):
         d=str(user.id)
         await ctx.message.delete()
         conn = sqlite3.connect("mybase.sqlite")
