@@ -276,21 +276,7 @@ async def popln(ctx, user:discord.Member, p, kod):
     else:
         await ctx.message.channel.send("Код неверный!!!")
 
-@Bot.command(pass_context=True)
-async def set(ctx, user:discord.Member, p, kod):
-    if str(kod) == str(pas):
-        d=str(user.id)
-        await ctx.message.delete()
-        conn = sqlite3.connect("mybase.sqlite")
-        cursor = conn.cursor()
-        cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(p,d,))
-        conn.commit()
-        await ctx.message.channel.send("Баланс игрока {} установлен на {}".format(user.name, p)
-        
-        cursor.close()
-        conn.close()
-    else:
-        await ctx.message.channel.send("Код неверный!!!")
+
     
 
 
