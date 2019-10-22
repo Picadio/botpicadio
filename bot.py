@@ -145,7 +145,7 @@ async def playhard(ctx):
     if w==1:
         b = random.randint(100000,1000000)
         c = random.randint(100000,1000000)
-        regim = random.randint(1,3)
+        regim = random.randint(1,2)
         if regim == 1:
             await ctx.message.channel.send( "{} + {}".format(c, b))
         if regim == 2:
@@ -210,11 +210,7 @@ async def on_message(message):
                 b=-3918391839
                 c=-7381283912
                 t=bool(1)
-        if regim == 3:
-            if str(message.content) == str(int(c)*int(b)):
-                b=-3918391839
-                c=-7381283912
-                t=bool(1)
+      
         if t == 1:
             b=str(message.author.id)
     
