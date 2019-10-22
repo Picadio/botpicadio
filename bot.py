@@ -147,11 +147,11 @@ async def playhard(ctx):
         c = random.randint(100000,1000000)
         regim = random.randint(1,3)
         if regim == 1:
-            await ctx.message.channel.send( "{} + {}".format(b, c))
+            await ctx.message.channel.send( "{} + {}".format(c, b))
         if regim == 2:
-            await ctx.message.channel.send( "{} - {}".format(b, c))
+            await ctx.message.channel.send( "{} - {}".format(c, b))
         if regim == 3:
-            await ctx.message.channel.send( "{} * {}".format(b, c))
+            await ctx.message.channel.send( "{} * {}".format(c, b))
         p=1
     else:
         await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
