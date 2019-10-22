@@ -268,7 +268,7 @@ async def on_message(message):
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
             while row is not None:
-               if str(message.author.id) in row:
+                if str(message.author.id) in row:
                     a=row[1]+10
                     break
                 row = cursor.fetchone()
