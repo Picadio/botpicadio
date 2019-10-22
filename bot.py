@@ -143,8 +143,8 @@ async def playhard(ctx):
             w=bool(1)
         row = cursor.fetchone()
     if w==1:
-        b = random.randint(100000,10000000)
-        c = random.randint(100000,10000000)
+        b = random.randint(100000,1000000)
+        c = random.randint(100000,1000000)
         regim = random.randint(1,3)
         if regim == 1:
             await ctx.message.channel.send( "{} + {}".format(b, c))
