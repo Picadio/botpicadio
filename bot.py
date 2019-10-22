@@ -6,6 +6,8 @@ import sqlite3
 import os
 b=int(-38918391)
 c=int(-83193912)
+m=int(-63721733)
+regim=int(0)
 p=int(0)
 r=0
 
@@ -71,6 +73,7 @@ async def playeasy(ctx):
     global c
     global p
     global r
+    
     r=str(ctx.message.author.id)
     conn = sqlite3.connect("mybase.sqlite")
     cursor = conn.cursor()
@@ -128,6 +131,7 @@ async def playhard(ctx):
     global c
     global p
     global r
+    global regim
     r=ctx.message.author.id
     conn = sqlite3.connect("mybase.sqlite")
     cursor = conn.cursor()
@@ -141,7 +145,13 @@ async def playhard(ctx):
     if w==1:
         b = random.randint(100000,10000000)
         c = random.randint(100000,10000000)
-        await ctx.message.channel.send( "{} + {}".format(b, c))
+        regim = random.randint(1,3)
+        if regim == 1:
+            await ctx.message.channel.send( "{} + {}".format(b, c))
+        if regim == 2:
+            await ctx.message.channel.send( "{} - {}".format(b, c))
+        if regim == 3:
+            await ctx.message.channel.send( "{} * {}".format(b, c))
         p=1
     else:
         await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
@@ -187,10 +197,25 @@ async def on_message(message):
     global b
     global c
     global p
-    if str(message.content) == str(int(c)+int(b)):
-        b=-3918391839
-        c=-7381283912
-        if p == 1:
+    
+    t=bool(0)
+    if p == 1:
+        if regim==1:
+            if str(message.content) == str(int(c)+int(b)):
+                b=-3918391839
+                c=-7381283912
+                t=bool(1)
+        if regim==2:
+            if str(message.content) == str(int(c)-int(b)):
+                b=-3918391839
+                c=-7381283912
+                t=bool(1)
+        if regim == 3:
+            if str(message.content) == str(int(c)*int(b)):
+                b=-3918391839
+                c=-7381283912
+                t=bool(1)
+        if t == 1:
             b=str(message.author.id)
     
             conn = sqlite3.connect("mybase.sqlite")
@@ -211,7 +236,10 @@ async def on_message(message):
 
 
             
-        if p == 2:
+    if p == 2:
+        if str(message.content) == str(int(c)+int(b)):
+            b=-3918391839
+            c=-7381283912
             b=str(message.author.id)
     
             conn = sqlite3.connect("mybase.sqlite")
@@ -229,7 +257,10 @@ async def on_message(message):
     
             cursor.close()
             conn.close()
-        if p == 3:
+    if p == 3:
+        if str(message.content) == str(int(c)+int(b)):
+            b=-3918391839
+            c=-7381283912
             b=str(message.author.id)
     
             conn = sqlite3.connect("mybase.sqlite")
@@ -237,7 +268,7 @@ async def on_message(message):
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
             while row is not None:
-                if str(message.author.id) in row:
+               if str(message.author.id) in row:
                     a=row[1]+10
                     break
                 row = cursor.fetchone()
