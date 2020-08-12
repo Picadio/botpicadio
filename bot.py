@@ -31,6 +31,12 @@ async def game(ctx):
 async def qq(ctx):
     await ctx.message.channel.send("Привет {}".format(ctx.message.author.mention))
 
+    
+@Bot.command(pass_context=True)
+async def PUMA(ctx):
+    await ctx.message.channel.send(image.jpg)
+    
+    
 @Bot.command(pass_context=True)
 async def buy(ctx,role:discord.Role):
     if role in ctx.message.author.roles:
