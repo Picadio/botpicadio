@@ -37,7 +37,16 @@ async def Puma(ctx):
     embed = discord.Embed(color = 0xff9900, title = 'VLADICK') 
     embed.set_image(url = "https://cdn.discordapp.com/attachments/421747668537311244/742863079867547698/image0.jpg") 
     await ctx.send(embed = embed)
+   
+@Bot.command(pass_context=True)
+async def Puma_full(ctx):
+    embed = discord.Embed(color = 0xff9900, title = 'VLADICK') 
     
+    embed.set_image(url = "https://i1.rozetka.ua/goods/10885300/puma_4056204301142_images_10885300719.jpg") 
+    embed.set_image(url = "https://cdn.sportmaster.ua/static/i/2000_2000/products/244595/QA6hi001.jpeg") 
+    embed.set_image(url = "https://images.shafastatic.net/135159668") 
+    embed.set_image(url = "https://www.runnerinn.com/f/13735/137358726/puma-enzo-2.jpg") 
+    await ctx.send(embed = embed)
     
 @Bot.command(pass_context=True)
 async def buy(ctx,role:discord.Role):
