@@ -35,7 +35,7 @@ async def qq(ctx):
 @Bot.command(pass_context=True)
 async def PUMA(ctx):
     embed = discord.Embed(color = 0xff9900, title = 'Random dog') 
-    embed.set_image(url = https://cdn.discordapp.com/attachments/421747668537311244/742863079867547698/image0.jpg) 
+    embed.set_image(url = "https://cdn.discordapp.com/attachments/421747668537311244/742863079867547698/image0.jpg") 
     await ctx.send(embed = embed)
     
     
