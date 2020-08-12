@@ -43,7 +43,7 @@ async def Puma_full(ctx):
     embed = discord.Embed(color = 0xff9900, title = 'Кепка VLADICKa') 
     embed1 = discord.Embed(color = 0xff9900, title = 'Толстовка VLADICKa') 
     embed2 = discord.Embed(color = 0xff9900, title = 'Штаны VLADICKa') 
-    embed3 = discord.Embed(color = 0xff9900, title = 'Кросовки VLADICKa') 
+    embed3 = discord.Embed(color = 0xff9900, title = 'Кросовок VLADICKa') 
     embed.set_image(url = "https://i1.rozetka.ua/goods/10885300/puma_4056204301142_images_10885300719.jpg") 
     embed1.set_image(url = "https://cdn.sportmaster.ua/static/i/2000_2000/products/244595/QA6hi001.jpeg") 
     embed2.set_image(url = "https://images.shafastatic.net/135159668") 
