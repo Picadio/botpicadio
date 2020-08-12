@@ -40,13 +40,18 @@ async def Puma(ctx):
    
 @Bot.command(pass_context=True)
 async def Puma_full(ctx):
-    embed = discord.Embed(color = 0xff9900, title = 'VLADICK') 
-    
+    embed = discord.Embed(color = 0xff9900, title = 'Кепка VLADICKa') 
+    embed1 = discord.Embed(color = 0xff9900, title = 'Толстовка VLADICKa') 
+    embed2 = discord.Embed(color = 0xff9900, title = 'Штаны VLADICKa') 
+    embed3 = discord.Embed(color = 0xff9900, title = 'Кросовки VLADICKa') 
     embed.set_image(url = "https://i1.rozetka.ua/goods/10885300/puma_4056204301142_images_10885300719.jpg") 
-    embed.set_image(url = "https://cdn.sportmaster.ua/static/i/2000_2000/products/244595/QA6hi001.jpeg") 
-    embed.set_image(url = "https://images.shafastatic.net/135159668") 
-    embed.set_image(url = "https://www.runnerinn.com/f/13735/137358726/puma-enzo-2.jpg") 
+    embed1.set_image(url = "https://cdn.sportmaster.ua/static/i/2000_2000/products/244595/QA6hi001.jpeg") 
+    embed2.set_image(url = "https://images.shafastatic.net/135159668") 
+    embed3.set_image(url = "https://www.runnerinn.com/f/13735/137358726/puma-enzo-2.jpg") 
     await ctx.send(embed = embed)
+    await ctx.send(embed = embed1)
+    await ctx.send(embed = embed2)
+    await ctx.send(embed = embed3)
     
 @Bot.command(pass_context=True)
 async def buy(ctx,role:discord.Role):
