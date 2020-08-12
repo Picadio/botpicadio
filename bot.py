@@ -34,7 +34,7 @@ async def qq(ctx):
     
 @Bot.command(pass_context=True)
 async def PUMA(ctx):
-    await ctx.message.channel.send(image.jpg)
+    await ctx.message.channel.send("image.jpg")
     
     
 @Bot.command(pass_context=True)
