@@ -91,7 +91,7 @@ async def upg(ctx):
 									cursor1.execute('''UPDATE test SET cm=? WHERE id=?''',((size+1),ctx.message.author.id,))
 									conn1.commit()
 									break
-						elif size-1!=0:
+						elif size-1 >= 0:
 							while row1 is not None:
 								if str(ctx.message.author.id) in row1:
 									await ctx.message.channel.send(str(ctx.message.author)+" Не повезло, -1 см от бибы")
