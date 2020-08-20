@@ -78,12 +78,12 @@ async def upg(ctx):
 						cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-100),ctx.message.author.id,))
 						conn.commit()
 						print(3)
-						r = random.randint(0, 1)
+						r = random.randint(0, 2)
 						conn1 = sqlite3.connect("twobase.sqlite")
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
-						if r == 0:
+						if r == 0 or r == 1:
 							print(4)
 							while row1 is not None:
 								if str(ctx.message.author.id) in row1:
