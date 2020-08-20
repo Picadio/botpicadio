@@ -56,6 +56,7 @@ async def upg(ctx):
 				size = int(row1[1])
 				w1=bool(0)
 				break
+			row1 = cursor1.fetchone()
 		cursor1.close()
 		conn1.close()
 		if w1:
@@ -91,6 +92,7 @@ async def upg(ctx):
 									cursor1.execute('''UPDATE test SET cm=? WHERE id=?''',((size+1),ctx.message.author.id,))
 									conn1.commit()
 									break
+								row1 = cursor1.fetchone()
 						else:
 							while row1 is not None:
 								if str(ctx.message.author.id) in row1:
@@ -98,9 +100,11 @@ async def upg(ctx):
 									cursor1.execute('''UPDATE test SET cm=? WHERE id=?''',((size-1),ctx.message.author.id,))
 									conn1.commit()
 									break
+								row1 = cursor1.fetchone()
 					else:
 						await ctx.message.channel.send("Это действие стоит 100. Вам не хватает {} балов".format(100-row[1]))
 					break
+				row = cursor.fetchone()
 				
 			if w==0:
 				await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !create")
