@@ -113,7 +113,7 @@ async def table_bal(ctx):
 		f = ctx.message.channel.members
 		for line in f:
 			if str(line.id) == row[0]:
-				await ctx.message.channel.send(str(line.name) + str(row[1]))
+				await ctx.message.channel.send(str(line.name) + " : " + str(row[1]))
 		row = cursor.fetchone()
 	
 		
