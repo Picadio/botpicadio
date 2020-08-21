@@ -30,6 +30,7 @@ async def playcasino(ctx, stavka, color):
 			if str(ctx.message.author.id) in row:
 				w=bool(1)
 				if row[1] >= int(stavka):
+					money = row[1]
 					q=bool(1)
 					conn.commit()
 				else:
@@ -56,7 +57,7 @@ async def playcasino(ctx, stavka, color):
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*10),d,))
+				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*10+money),d,))
 				conn.commit()
 				cursor.close()
 				conn.close()
@@ -73,7 +74,7 @@ async def playcasino(ctx, stavka, color):
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2),d,))
+				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
 				conn.commit()
 				cursor.close()
 				conn.close()
@@ -90,7 +91,7 @@ async def playcasino(ctx, stavka, color):
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2),d,))
+				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
 				conn.commit()
 				cursor.close()
 				conn.close()
