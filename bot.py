@@ -217,27 +217,27 @@ async def set_size(ctx, user:discord.Member, p):
 
 @Bot.command(pass_context=True)
 async def size(ctx):
-    conn = sqlite3.connect("twobase.sqlite")
-    cursor = conn.cursor()
-    cursor.execute('SELECT * FROM test')
-    row = cursor.fetchone()
-    y=bool(0)
-    while row is not None:
-        if str(ctx.message.author.id) in row:
-	    y=bool(1)
-	    row = cursor.fetchone()
-    if y==1:
+	conn = sqlite3.connect("twobase.sqlite")
+	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
+	y=bool(0)
 	while row is not None:
-	    if str(ctx.message.author.id) in row:
-		await ctx.message.channel.send("Длина бибы:"+str(row[1])+" см")
-		break
-	    row = cursor.fetchone()
-    else:
-	await ctx.message.channel.send("Вы не создали себя. Пропишите !create")
-    cursor.close()
-    conn.close()
+		if str(ctx.message.author.id) in row:
+			y=bool(1)
+			row = cursor.fetchone()
+	if y==1:
+		cursor.execute('SELECT * FROM test')
+		row = cursor.fetchone()
+		while row is not None:
+			if str(ctx.message.author.id) in row:
+				await ctx.message.channel.send("Длина бибы:"+str(row[1])+" см")
+				break
+		   	row = cursor.fetchone()
+	else:
+		await ctx.message.channel.send("Вы не создали себя. Пропишите !create")
+	cursor.close()
+	conn.close()
       
 @Bot.command(pass_context=True)
 async def game(ctx):
