@@ -68,10 +68,10 @@ async def playcasino(ctx, stavka, color):
 				cursor.execute('SELECT * FROM test')
 				row = cursor.fetchone()
 				while row is not None:
-				    if str(user.id) in row:
-					a=row[1]+int(p)
-					break
-				    row = cursor.fetchone()
+					if str(user.id) in row:
+						a=row[1]+int(p)
+						break
+					row = cursor.fetchone()
 				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(stavka*2),d,))
 				conn.commit()
 				cursor.close()
@@ -85,10 +85,10 @@ async def playcasino(ctx, stavka, color):
 				cursor.execute('SELECT * FROM test')
 				row = cursor.fetchone()
 				while row is not None:
-				    if str(user.id) in row:
-					a=row[1]+int(p)
-					break
-				    row = cursor.fetchone()
+					if str(user.id) in row:
+						a=row[1]+int(p)
+						break
+					row = cursor.fetchone()
 				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(stavka*2),d,))
 				conn.commit()
 				cursor.close()
