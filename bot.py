@@ -523,7 +523,7 @@ async def on_message(message):
    
 pas = os.environ.get("KOD")
 @Bot.command(pass_context=True)
-async def popln(ctx, user:discord.Member, p, kod):
+async def popln(ctx, user:discord.Member, p):
 	if "343279631807545356" == ctx.message.author.id:
 		d=str(user.id)
 		await ctx.message.delete()
@@ -547,7 +547,7 @@ async def popln(ctx, user:discord.Member, p, kod):
 		await ctx.message.channel.send("У вас нет прав для выполнения этой команды")
 
 @Bot.command(pass_context=True)
-async def set(ctx, user:discord.Member, p, kod):
+async def set(ctx, user:discord.Member, p):
 	if "343279631807545356" == ctx.message.author.id:
 		d=str(user.id)
 		await ctx.message.delete()
