@@ -18,7 +18,7 @@ Bot = commands.Bot(command_prefix='!')
 async def on_ready():
     print("Bot is online")
 @Bot.command(pass_context=True)
-async def playcasino(ctx, stavka, color):
+async def playcasino(ctx, color, stavka):
 	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
 		conn = sqlite3.connect("mybase.sqlite")
 		cursor = conn.cursor()
