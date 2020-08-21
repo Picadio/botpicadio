@@ -30,7 +30,7 @@ async def playcasino(ctx, stavka, color):
 			if str(ctx.message.author.id) in row:
 				w=bool(1)
 				if row[1] >= int(stavka):
-					money = row[1]
+					money = row[1]-int(stavka)
 					q=bool(1)
 					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-int(stavka)),ctx.message.author.id,))
 					conn.commit()
