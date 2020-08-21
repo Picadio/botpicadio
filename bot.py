@@ -102,7 +102,9 @@ async def playcasino(ctx, color, stavka):
 	else:
 		await ctx.message.channel.send("Иди нахуй, так нельзя!")
 				
-	
+@Bot.command(pass_context=True)
+async def table_bal(ctx):
+	print(ctx.message.channel.roles)
 	
 @Bot.command(pass_context=True)
 async def create(ctx):
