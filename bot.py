@@ -106,8 +106,8 @@ async def playcasino(ctx, color, stavka):
 async def table_bal(ctx):
 	f = ctx.message.channel.members
 	for line in f:
-		line.replace("guild=<Guild id=421747668537311242 name='Друзья' shard_id=None chunked=True member_count=8>", "")
-	print(f)
+		print(line)
+	
 	
 @Bot.command(pass_context=True)
 async def create(ctx):
