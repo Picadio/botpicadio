@@ -32,6 +32,7 @@ async def playcasino(ctx, stavka, color):
 				if row[1] >= int(stavka):
 					money = row[1]
 					q=bool(1)
+					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-int(stavka)),ctx.message.author.id,))
 					conn.commit()
 				else:
 					await ctx.message.channel.send("Ставка слишком велика, на вашем счету недостаточно баллов!")
@@ -45,7 +46,7 @@ async def playcasino(ctx, stavka, color):
 			r = random.randint(0, 100)
 			print(r)
 			if r == 0 and color == "green":
-				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*10))
+				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*100))
 				d=str(ctx.message.author.id)
 
 				conn = sqlite3.connect("mybase.sqlite")
@@ -57,7 +58,7 @@ async def playcasino(ctx, stavka, color):
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*10+money),d,))
+				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*100+money),d,))
 				conn.commit()
 				cursor.close()
 				conn.close()
@@ -97,18 +98,7 @@ async def playcasino(ctx, stavka, color):
 				conn.close()
 			else:
 				await ctx.message.channel.send("Увы вы проиграли -"+str(stavka))
-				conn = sqlite3.connect("mybase.sqlite")
-				cursor = conn.cursor()
-				cursor.execute('SELECT * FROM test')
-				row = cursor.fetchone()
-				while row is not None:
-					if str(ctx.message.author.id) in row:
-						cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-int(stavka)),ctx.message.author.id,))
-						conn.commit()
-						break
-					row = cursor.fetchone()
-				cursor.close()
-				conn.close()
+				
 	
 	
 @Bot.command(pass_context=True)
