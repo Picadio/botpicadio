@@ -532,10 +532,10 @@ async def popln(ctx, user:discord.Member, p, kod):
 		cursor.execute('SELECT * FROM test')
 		row = cursor.fetchone()
 		while row is not None:
-		    if str(user.id) in row:
-			a=row[1]+int(p)
-			break
-		    row = cursor.fetchone()
+			if str(user.id) in row:
+				a=row[1]+int(p)
+				break
+			row = cursor.fetchone()
 		cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(a,d,))
 		conn.commit()
 		await ctx.message.channel.send("Баланс игрока {} пополнен на {} балов".format(user.name, p))
