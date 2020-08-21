@@ -121,6 +121,17 @@ async def table_bal(ctx):
 	cursor.close()
 	conn.close()
 @Bot.command(pass_context=True)
+async def vopros(ctx):
+	r = random.randint(1, 100)
+	if r >= 1 and r <=5:
+		await ctx.message.channel.send("Пошел нахуй")
+	elif r >= 6 and r <= 40:
+		await ctx.message.channel.send("Да")
+	elif r >= 41 and r <= 75:
+		await ctx.message.channel.send("Нет")
+	elif r >= 76 and r <= 100:
+		await ctx.message.channel.send("Возможно")
+@Bot.command(pass_context=True)
 async def table_size(ctx):
 	conn = sqlite3.connect("twobase.sqlite")
 	cursor = conn.cursor()
