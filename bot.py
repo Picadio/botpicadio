@@ -46,7 +46,7 @@ async def playcasino(ctx, color, stavka):
 			if q and w:
 				r = random.randint(0, 100)
 				print(r)
-				if r == 0 and color == "green":
+				if (r == 0 or r == 1) and color == "green":
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*100))
 					d=str(ctx.message.author.id)
 
@@ -63,7 +63,7 @@ async def playcasino(ctx, color, stavka):
 					conn.commit()
 					cursor.close()
 					conn.close()
-				elif r >=1 and r <= 50 and color == "red":
+				elif r >1 and r <= 50 and color == "red":
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
 					d=str(ctx.message.author.id)
 
