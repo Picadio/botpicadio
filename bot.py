@@ -100,7 +100,7 @@ async def playcasino(ctx, color, stavka):
 				else:
 					await ctx.message.channel.send("Увы вы проиграли -"+str(stavka))
 	else:
-		await ctx.message.channel.send("Иди нахуй, так нельзя!")
+		await ctx.message.channel.send("Так нельзя!")
 				
 @Bot.command(pass_context=True)
 async def table_bal(ctx):
@@ -113,7 +113,7 @@ async def table_bal(ctx):
 		f = ctx.message.channel.members
 		for line in f:
 			if str(line.id) == row[0]:
-				print(line.name, row[1])
+				await ctx.message.channel.send(str(line.name) + str(row[1]))
 		row = cursor.fetchone()
 	
 		
