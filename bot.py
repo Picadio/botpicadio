@@ -104,9 +104,21 @@ async def playcasino(ctx, color, stavka):
 				
 @Bot.command(pass_context=True)
 async def table_bal(ctx):
-	f = ctx.message.channel.members
-	for line in f:
-		print(line.name, line.id)
+	conn = sqlite3.connect("mybase.sqlite")
+	cursor = conn.cursor()
+	cursor.execute('SELECT * FROM test')
+	row = cursor.fetchone()
+	
+	while row is not None:
+		print(row[0].name)
+	
+		
+
+	cursor.close()
+	conn.close()
+	#f = ctx.message.channel.members
+	#for line in f:
+		#print(line.name, line.id)
 	
 	
 @Bot.command(pass_context=True)
