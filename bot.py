@@ -107,9 +107,26 @@ async def upg(ctx):
 				row = cursor.fetchone()
 				
 			if w==0:
-				await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !create")
+				await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 		cursor.close()
 		conn.close()
+@Bot.command(pass_context=True)
+async def set_size(ctx, user:discord.Member, p, kod):
+    if str(kod) == str(pas):
+        d=str(user.id)
+        await ctx.message.delete()
+        conn = sqlite3.connect("twobase.sqlite")
+        cursor = conn.cursor()
+        cursor.execute('''UPDATE test SET cm=? WHERE id=?''',(p,d,))
+        conn.commit()
+        await ctx.message.channel.send("Длина бибы у игрока {} изменена на {}".format(user.name, p))
+        
+        
+        cursor.close()
+        conn.close()
+    else:
+        await ctx.message.channel.send("Код неверный!!!")    
+
 @Bot.command(pass_context=True)
 async def size(ctx):
     conn = sqlite3.connect("twobase.sqlite")
