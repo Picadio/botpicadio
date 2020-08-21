@@ -42,16 +42,17 @@ async def playcasino(ctx, stavka, color):
 		conn.close()
 		if q and w:
 			r = random.randint(0, 100)
+			print(r)
 			if r == 0 and color == "green":
 				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*10))
-				d=str(user.id)
+				d=str(ctx.message.author.id)
 
 				conn = sqlite3.connect("mybase.sqlite")
 				cursor = conn.cursor()
 				cursor.execute('SELECT * FROM test')
 				row = cursor.fetchone()
 				while row is not None:
-					if str(user.id) in row:
+					if str(ctx.message.author.id) in row:
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
@@ -61,14 +62,14 @@ async def playcasino(ctx, stavka, color):
 				conn.close()
 			elif r >=1 and r <= 50 and color == "red":
 				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
-				d=str(user.id)
+				d=str(ctx.message.author.id)
 
 				conn = sqlite3.connect("mybase.sqlite")
 				cursor = conn.cursor()
 				cursor.execute('SELECT * FROM test')
 				row = cursor.fetchone()
 				while row is not None:
-					if str(user.id) in row:
+					if str(ctx.message.author.id) in row:
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
@@ -78,14 +79,14 @@ async def playcasino(ctx, stavka, color):
 				conn.close()
 			elif r >50 and r <= 100 and color == "black":
 				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
-				d=str(user.id)
+				d=str(ctx.message.author.id)
 
 				conn = sqlite3.connect("mybase.sqlite")
 				cursor = conn.cursor()
 				cursor.execute('SELECT * FROM test')
 				row = cursor.fetchone()
 				while row is not None:
-					if str(user.id) in row:
+					if str(ctx.message.author.id) in row:
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
