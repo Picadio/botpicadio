@@ -200,7 +200,7 @@ async def upg(ctx):
 		conn.close()
 @Bot.command(pass_context=True)
 async def set_size(ctx, user:discord.Member, p):
-	if "343279631807545356" == ctx.message.author.id:
+	if "343279631807545356" == str(ctx.message.author.id):
 		d=str(user.id)
 		await ctx.message.delete()
 		conn = sqlite3.connect("twobase.sqlite")
@@ -524,7 +524,7 @@ async def on_message(message):
 pas = os.environ.get("KOD")
 @Bot.command(pass_context=True)
 async def popln(ctx, user:discord.Member, p):
-	if "343279631807545356" == ctx.message.author.id:
+	if "343279631807545356" == str(ctx.message.author.id):
 		d=str(user.id)
 		await ctx.message.delete()
 		conn = sqlite3.connect("mybase.sqlite")
@@ -548,7 +548,7 @@ async def popln(ctx, user:discord.Member, p):
 
 @Bot.command(pass_context=True)
 async def set(ctx, user:discord.Member, p):
-	if "343279631807545356" == ctx.message.author.id:
+	if "343279631807545356" == str(ctx.message.author.id):
 		d=str(user.id)
 		await ctx.message.delete()
 		conn = sqlite3.connect("mybase.sqlite")
