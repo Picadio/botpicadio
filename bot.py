@@ -202,19 +202,19 @@ async def upg(ctx):
 async def set_size(ctx, user:discord.Member, p, kod):
     if "343279631807545356" == ctx.message.author.id:
 	    if str(kod) == str(pas):
-		d=str(user.id)
-		await ctx.message.delete()
-		conn = sqlite3.connect("twobase.sqlite")
-		cursor = conn.cursor()
-		cursor.execute('''UPDATE test SET cm=? WHERE id=?''',(p,d,))
-		conn.commit()
-		await ctx.message.channel.send("Длина бибы у игрока {} изменена на {}".format(user.name, p))
+			d=str(user.id)
+			await ctx.message.delete()
+			conn = sqlite3.connect("twobase.sqlite")
+			cursor = conn.cursor()
+			cursor.execute('''UPDATE test SET cm=? WHERE id=?''',(p,d,))
+			conn.commit()
+			await ctx.message.channel.send("Длина бибы у игрока {} изменена на {}".format(user.name, p))
 
 
-		cursor.close()
-		conn.close()
+			cursor.close()
+			conn.close()
 	    else:
-		await ctx.message.channel.send("Код неверный!!!")    
+			await ctx.message.channel.send("Код неверный!!!")    
 
 	@Bot.command(pass_context=True)
 	async def size(ctx):
