@@ -120,6 +120,24 @@ async def table_bal(ctx):
 
 	cursor.close()
 	conn.close()
+@Bot.command(pass_context=True)
+async def table_size(ctx):
+	conn = sqlite3.connect("twobase.sqlite")
+	cursor = conn.cursor()
+	cursor.execute('SELECT * FROM test')
+	row = cursor.fetchone()
+	
+	while row is not None:
+		f = ctx.message.channel.members
+		for line in f:
+			if str(line.id) == row[0]:
+				await ctx.message.channel.send(str(line.name) + " : " + str(row[1]) + " cm")
+		row = cursor.fetchone()
+	
+		
+
+	cursor.close()
+	conn.close()
 	
 	
 	
