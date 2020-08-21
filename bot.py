@@ -27,17 +27,17 @@ async def playcasino(ctx, stavka, color):
 		w=bool(0)
 		q=bool(0)
 		while row is not None:
-		    if str(ctx.message.author.id) in row:
-			w=bool(1)
-			if row[1] >= stavka:
-			    q=bool(1)
-			    conn.commit()
-			else:
-			   await ctx.message.channel.send("Ставка слишком велика, на вашем счету недостаточно баллов!")
-			break
-		    row = cursor.fetchone()
+			if str(ctx.message.author.id) in row:
+				w=bool(1)
+				if row[1] >= stavka:
+					q=bool(1)
+					conn.commit()
+				else:
+					await ctx.message.channel.send("Ставка слишком велика, на вашем счету недостаточно баллов!")
+				break
+			row = cursor.fetchone()
 		if w==0:
-		    await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
+			await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 		cursor.close()
 		conn.close()
 		if q and w:
