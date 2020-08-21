@@ -114,6 +114,7 @@ async def table_bal(ctx):
 		for line in f:
 			if str(line.id) == row[0]:
 				print(line.name, row[1])
+		row = cursor.fetchone()
 	
 		
 
