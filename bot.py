@@ -110,15 +110,16 @@ async def table_bal(ctx):
 	row = cursor.fetchone()
 	
 	while row is not None:
-		print(row[0].name)
+		f = ctx.message.channel.members
+		for line in f:
+			if line.id == row[0]
+				print(line.name, row[1])
 	
 		
 
 	cursor.close()
 	conn.close()
-	#f = ctx.message.channel.members
-	#for line in f:
-		#print(line.name, line.id)
+	
 	
 	
 @Bot.command(pass_context=True)
