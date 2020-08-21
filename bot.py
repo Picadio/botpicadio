@@ -199,22 +199,21 @@ async def upg(ctx):
 		cursor.close()
 		conn.close()
 @Bot.command(pass_context=True)
-async def set_size(ctx, user:discord.Member, p, kod):
-    if "343279631807545356" == ctx.message.author.id:
-	    if str(kod) == str(pas):
-			d=str(user.id)
-			await ctx.message.delete()
-			conn = sqlite3.connect("twobase.sqlite")
-			cursor = conn.cursor()
-			cursor.execute('''UPDATE test SET cm=? WHERE id=?''',(p,d,))
-			conn.commit()
-			await ctx.message.channel.send("Длина бибы у игрока {} изменена на {}".format(user.name, p))
+async def set_size(ctx, user:discord.Member, p):
+	if "343279631807545356" == ctx.message.author.id:
+		d=str(user.id)
+		await ctx.message.delete()
+		conn = sqlite3.connect("twobase.sqlite")
+		cursor = conn.cursor()
+		cursor.execute('''UPDATE test SET cm=? WHERE id=?''',(p,d,))
+		conn.commit()
+		await ctx.message.channel.send("Длина бибы у игрока {} изменена на {}".format(user.name, p))
 
 
-			cursor.close()
-			conn.close()
-	    else:
-			await ctx.message.channel.send("Код неверный!!!")    
+		cursor.close()
+		conn.close()
+	else:
+		await ctx.message.channel.send("У вас нет прав для выполнения этой команды")
 
 	@Bot.command(pass_context=True)
 	async def size(ctx):
@@ -526,45 +525,43 @@ pas = os.environ.get("KOD")
 @Bot.command(pass_context=True)
 async def popln(ctx, user:discord.Member, p, kod):
 	if "343279631807545356" == ctx.message.author.id:
-		if str(kod) == str(pas):
-			d=str(user.id)
-			await ctx.message.delete()
-			conn = sqlite3.connect("mybase.sqlite")
-			cursor = conn.cursor()
-			cursor.execute('SELECT * FROM test')
-			row = cursor.fetchone()
-			while row is not None:
-			    if str(user.id) in row:
-				a=row[1]+int(p)
-				break
-			    row = cursor.fetchone()
-			cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(a,d,))
-			conn.commit()
-			await ctx.message.channel.send("Баланс игрока {} пополнен на {} балов".format(user.name, p))
+		d=str(user.id)
+		await ctx.message.delete()
+		conn = sqlite3.connect("mybase.sqlite")
+		cursor = conn.cursor()
+		cursor.execute('SELECT * FROM test')
+		row = cursor.fetchone()
+		while row is not None:
+		    if str(user.id) in row:
+			a=row[1]+int(p)
+			break
+		    row = cursor.fetchone()
+		cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(a,d,))
+		conn.commit()
+		await ctx.message.channel.send("Баланс игрока {} пополнен на {} балов".format(user.name, p))
 
 
-			cursor.close()
-			conn.close()
-		else:
-			await ctx.message.channel.send("Код неверный!!!")
+		cursor.close()
+		conn.close()
+	else:
+		await ctx.message.channel.send("У вас нет прав для выполнения этой команды")
 
 @Bot.command(pass_context=True)
 async def set(ctx, user:discord.Member, p, kod):
 	if "343279631807545356" == ctx.message.author.id:
-	 	if str(kod) == str(pas):
-			d=str(user.id)
-			await ctx.message.delete()
-			conn = sqlite3.connect("mybase.sqlite")
-			cursor = conn.cursor()
-			cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(p,d,))
-			conn.commit()
-			await ctx.message.channel.send("Баланс игрока {} установлен на {}".format(user.name, p))
+		d=str(user.id)
+		await ctx.message.delete()
+		conn = sqlite3.connect("mybase.sqlite")
+		cursor = conn.cursor()
+		cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(p,d,))
+		conn.commit()
+		await ctx.message.channel.send("Баланс игрока {} установлен на {}".format(user.name, p))
 
 
-			cursor.close()
-			conn.close()
-		else:
-			await ctx.message.channel.send("Код неверный!!!")    
+		cursor.close()
+		conn.close()
+	else:
+		await ctx.message.channel.send("У вас нет прав для выполнения этой команды")
 
 
 @Bot.command(pass_context=True)
