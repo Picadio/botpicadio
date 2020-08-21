@@ -105,8 +105,8 @@ async def playcasino(ctx, color, stavka):
 @Bot.command(pass_context=True)
 async def table_bal(ctx):
 	f = ctx.message.channel.members
-	for id in f:
-		print(id)
+	for line in f:
+		print(line, line.id)
 	
 	
 @Bot.command(pass_context=True)
