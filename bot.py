@@ -19,85 +19,88 @@ async def on_ready():
     print("Bot is online")
 @Bot.command(pass_context=True)
 async def playcasino(ctx, color, stavka):
-	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
-		conn = sqlite3.connect("mybase.sqlite")
-		cursor = conn.cursor()
-		cursor.execute('SELECT * FROM test')
-		row = cursor.fetchone()
-		w=bool(0)
-		q=bool(0)
-		while row is not None:
-			if str(ctx.message.author.id) in row:
-				w=bool(1)
-				if row[1] >= int(stavka):
-					money = row[1]-int(stavka)
-					q=bool(1)
-					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-int(stavka)),ctx.message.author.id,))
-					conn.commit()
-				else:
-					await ctx.message.channel.send("Ставка слишком велика, на вашем счету недостаточно баллов!")
-				break
+	if stavka > 0:
+		if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
+			conn = sqlite3.connect("mybase.sqlite")
+			cursor = conn.cursor()
+			cursor.execute('SELECT * FROM test')
 			row = cursor.fetchone()
-		if w==0:
-			await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
-		cursor.close()
-		conn.close()
-		if q and w:
-			r = random.randint(0, 100)
-			print(r)
-			if r == 0 and color == "green":
-				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*100))
-				d=str(ctx.message.author.id)
-
-				conn = sqlite3.connect("mybase.sqlite")
-				cursor = conn.cursor()
-				cursor.execute('SELECT * FROM test')
+			w=bool(0)
+			q=bool(0)
+			while row is not None:
+				if str(ctx.message.author.id) in row:
+					w=bool(1)
+					if row[1] >= int(stavka):
+						money = row[1]-int(stavka)
+						q=bool(1)
+						cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-int(stavka)),ctx.message.author.id,))
+						conn.commit()
+					else:
+						await ctx.message.channel.send("Ставка слишком велика, на вашем счету недостаточно баллов!")
+					break
 				row = cursor.fetchone()
-				while row is not None:
-					if str(ctx.message.author.id) in row:
-						a=row[1]+int(p)
-						break
-					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*100+money),d,))
-				conn.commit()
-				cursor.close()
-				conn.close()
-			elif r >=1 and r <= 50 and color == "red":
-				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
-				d=str(ctx.message.author.id)
+			if w==0:
+				await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
+			cursor.close()
+			conn.close()
+			if q and w:
+				r = random.randint(0, 100)
+				print(r)
+				if r == 0 and color == "green":
+					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*100))
+					d=str(ctx.message.author.id)
 
-				conn = sqlite3.connect("mybase.sqlite")
-				cursor = conn.cursor()
-				cursor.execute('SELECT * FROM test')
-				row = cursor.fetchone()
-				while row is not None:
-					if str(ctx.message.author.id) in row:
-						a=row[1]+int(p)
-						break
+					conn = sqlite3.connect("mybase.sqlite")
+					cursor = conn.cursor()
+					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
-				conn.commit()
-				cursor.close()
-				conn.close()
-			elif r >50 and r <= 100 and color == "black":
-				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
-				d=str(ctx.message.author.id)
+					while row is not None:
+						if str(ctx.message.author.id) in row:
+							a=row[1]+int(p)
+							break
+						row = cursor.fetchone()
+					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*100+money),d,))
+					conn.commit()
+					cursor.close()
+					conn.close()
+				elif r >=1 and r <= 50 and color == "red":
+					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
+					d=str(ctx.message.author.id)
 
-				conn = sqlite3.connect("mybase.sqlite")
-				cursor = conn.cursor()
-				cursor.execute('SELECT * FROM test')
-				row = cursor.fetchone()
-				while row is not None:
-					if str(ctx.message.author.id) in row:
-						a=row[1]+int(p)
-						break
+					conn = sqlite3.connect("mybase.sqlite")
+					cursor = conn.cursor()
+					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
-				conn.commit()
-				cursor.close()
-				conn.close()
-			else:
-				await ctx.message.channel.send("Увы вы проиграли -"+str(stavka))
+					while row is not None:
+						if str(ctx.message.author.id) in row:
+							a=row[1]+int(p)
+							break
+						row = cursor.fetchone()
+					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
+					conn.commit()
+					cursor.close()
+					conn.close()
+				elif r >50 and r <= 100 and color == "black":
+					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
+					d=str(ctx.message.author.id)
+
+					conn = sqlite3.connect("mybase.sqlite")
+					cursor = conn.cursor()
+					cursor.execute('SELECT * FROM test')
+					row = cursor.fetchone()
+					while row is not None:
+						if str(ctx.message.author.id) in row:
+							a=row[1]+int(p)
+							break
+						row = cursor.fetchone()
+					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
+					conn.commit()
+					cursor.close()
+					conn.close()
+				else:
+					await ctx.message.channel.send("Увы вы проиграли -"+str(stavka))
+	else:
+		await ctx.message.channel.send("Иди нахуй, так нельзя!")
 				
 	
 	
