@@ -233,7 +233,7 @@ async def size(ctx):
 			if str(ctx.message.author.id) in row:
 				await ctx.message.channel.send("Длина бибы:"+str(row[1])+" см")
 				break
-		   	row = cursor.fetchone()
+			row = cursor.fetchone()
 	else:
 		await ctx.message.channel.send("Вы не создали себя. Пропишите !create")
 	cursor.close()
