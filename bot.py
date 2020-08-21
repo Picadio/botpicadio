@@ -29,7 +29,7 @@ async def playcasino(ctx, stavka, color):
 		while row is not None:
 			if str(ctx.message.author.id) in row:
 				w=bool(1)
-				if row[1] >= stavka:
+				if row[1] >= int(stavka):
 					q=bool(1)
 					conn.commit()
 				else:
@@ -43,7 +43,7 @@ async def playcasino(ctx, stavka, color):
 		if q and w:
 			r = random.randint(0, 100)
 			if r == 0 and color == "green":
-				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(stavka*10))
+				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*10))
 				d=str(user.id)
 
 				conn = sqlite3.connect("mybase.sqlite")
@@ -55,12 +55,12 @@ async def playcasino(ctx, stavka, color):
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(stavka*10),d,))
+				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*10),d,))
 				conn.commit()
 				cursor.close()
 				conn.close()
 			elif r >=1 and r <= 50 and color == "red":
-				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(stavka*2))
+				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
 				d=str(user.id)
 
 				conn = sqlite3.connect("mybase.sqlite")
@@ -72,12 +72,12 @@ async def playcasino(ctx, stavka, color):
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(stavka*2),d,))
+				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2),d,))
 				conn.commit()
 				cursor.close()
 				conn.close()
 			elif r >50 and r <= 100 and color == "black":
-				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(stavka*2))
+				await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
 				d=str(user.id)
 
 				conn = sqlite3.connect("mybase.sqlite")
@@ -89,7 +89,7 @@ async def playcasino(ctx, stavka, color):
 						a=row[1]+int(p)
 						break
 					row = cursor.fetchone()
-				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(stavka*2),d,))
+				cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2),d,))
 				conn.commit()
 				cursor.close()
 				conn.close()
@@ -101,7 +101,7 @@ async def playcasino(ctx, stavka, color):
 				row = cursor.fetchone()
 				while row is not None:
 					if str(ctx.message.author.id) in row:
-						cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-stavka),ctx.message.author.id,))
+						cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-int(stavka)),ctx.message.author.id,))
 						conn.commit()
 						break
 					row = cursor.fetchone()
