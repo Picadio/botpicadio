@@ -112,7 +112,7 @@ async def table_bal(ctx):
 	while row is not None:
 		f = ctx.message.channel.members
 		for line in f:
-			if line.id == row[0]
+			if str(line.id) == row[0]:
 				print(line.name, row[1])
 	
 		
