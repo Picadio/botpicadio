@@ -655,6 +655,32 @@ async def info(ctx, member: discord.Member):
 async def logika(ctx):
     await ctx.message.channel.send("Я попробовал и смог (Цитата великих)")
 
+@Bot.command(pass_context=True)
+async def spam(ctx, member: discord.Member, text, colvo, lichka):
+	i=0
+	while i<int(colvo):
+		if lichka=='1':
+			await member.send(member.mention+" "+text)
+		else:
+			await ctx.message.channel.send(member.mention+" "+text)
+		i+=1
+@Bot.remove_command("help")
+@Bot.command(pass_context=True)
+async def help(ctx):
+	await ctx.message.channel.send("!info @учасник - инфа про учасника")
+	await ctx.message.channel.send("!reg - регистрация в боте, для взаимодействия с ним")
+	await ctx.message.channel.send("!bal - посмотреть свой баланс")
+	await ctx.message.channel.send("!playhard / !playmedium / !playeasy - решить пример определёной сложности(дают баллы)")
+	await ctx.message.channel.send("!buy Доступ - купить роль Доступ")
+	await ctx.message.channel.send("!create - создать перса")
+	await ctx.message.channel.send("!upg - прокачать бибу персу")
+	await ctx.message.channel.send("!size - узнать размер своей бибы")
+	await ctx.message.channel.send("!playcasino цвет(red/black/green) ставка - сыграть в казино на баллы")
+	await ctx.message.channel.send("!table_bal - топ по балам")
+	await ctx.message.channel.send("!table_size - топ по размеру бибы")
+	await ctx.message.channel.send("!vopros текст - ответ на вопрос(да/нет/возможно)")
+	await ctx.message.channel.send("!Puma / !Puma_full - ...")
+	await ctx.message.channel.send("!logika - ...")
     
     
         
