@@ -246,28 +246,28 @@ async def set_size(ctx, user:discord.Member, p):
 
 @Bot.command(pass_context=True)
 async def size(ctx):
-	conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-			password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
-	cursor = conn.cursor()
-	cursor.execute('SELECT * FROM test')
-	row = cursor.fetchone()
-	y=bool(0)
-	while row is not None:
-		if ctx.message.author.id in row:
-	    		y=bool(1)
-	row = cursor.fetchone()
-	if y==1:
-		cursor.execute('SELECT * FROM test')
-		row = cursor.fetchone()
-		while row is not None:
-	    		if ctx.message.author.id in row:
-				await ctx.message.channel.send("Длина бибы:"+str(row[2]))
-				break
-	    	row = cursor.fetchone()
-	else:
-		await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
-	cursor.close()
-	conn.close()
+    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM test')
+    row = cursor.fetchone()
+    y=bool(0)
+    while row is not None:
+        if ctx.message.author.id in row:
+            y=bool(1)
+        row = cursor.fetchone()
+    if y==1:
+        cursor.execute('SELECT * FROM test')
+        row = cursor.fetchone()
+        while row is not None:
+            if ctx.message.author.id in row:
+                await ctx.message.channel.send("Длина бибы:"+str(row[2]))
+                break
+            row = cursor.fetchone()
+    else:
+        await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
+    cursor.close()
+    conn.close()		
       
 @Bot.command(pass_context=True)
 async def game(ctx):
