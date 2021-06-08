@@ -167,8 +167,8 @@ async def table_size(ctx):
 async def upg(ctx):
 	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
 		print(1)
-		conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+		conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
 		cursor1 = conn1.cursor()
 		cursor1.execute('SELECT * FROM test')
 		row1 = cursor1.fetchone()
@@ -184,8 +184,8 @@ async def upg(ctx):
 		if w1:
 			await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 		else:
-			conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+			conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
 			cursor = conn.cursor()
 			cursor.execute('SELECT * FROM test')
 			row = cursor.fetchone()
@@ -201,8 +201,8 @@ async def upg(ctx):
 						conn.commit()
 						
 						r = random.randint(0, int(size/10+1))
-						conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                                            password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+						conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
+                        				password=db_password, host=db_host)
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
