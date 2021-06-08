@@ -178,7 +178,7 @@ async def upg(ctx):
 				size = int(row1[2])
 				w1=bool(0)
 				break
-            		row1 = cursor.fetchone()
+            row1 = cursor.fetchone()
 		cursor1.close()
 		conn1.close()
 		if w1:
@@ -224,7 +224,7 @@ async def upg(ctx):
 					else:
 						await ctx.message.channel.send("Будет доступно через {0}:{1}:{2}".format(int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))//3600), int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))%3600//60), int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))%3600%60)))
 					break
-                		row = cursor.fetchone()
+                row = cursor.fetchone()
 				
 			if w==0:
 				await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
