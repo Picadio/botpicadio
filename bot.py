@@ -253,8 +253,8 @@ async def size(ctx):
 	row = cursor.fetchone()
 	y=bool(0)
 	while row is not None:
-	if ctx.message.author.id in row:
-	    y=bool(1)
+		if ctx.message.author.id in row:
+	    		y=bool(1)
 	row = cursor.fetchone()
 	if y==1:
 	cursor.execute('SELECT * FROM test')
