@@ -206,7 +206,7 @@ async def upg(ctx):
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
-						if r >= 0 and r <= size/10:
+						if r >= 0 and r <= size//10:
 							print(4)
 							while row1 is not None:
 								if ctx.message.author.id in row1:
