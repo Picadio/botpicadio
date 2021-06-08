@@ -4,6 +4,7 @@ from discord.ext.commands import Bot
 import random
 import sqlite3
 import os
+import psycopg2
 b=int(-38918391)
 c=int(-83193912)
 m=int(-63721733)
