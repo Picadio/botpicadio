@@ -178,7 +178,7 @@ async def upg(ctx):
 				size = int(row1[2])
 				w1=bool(0)
 				break
-			row1 = cursor.fetchone()
+			row1 = cursor1.fetchone()
 		cursor1.close()
 		conn1.close()
 		if w1:
