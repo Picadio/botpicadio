@@ -214,6 +214,7 @@ async def upg(ctx):
 									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size+1),ctx.message.author.id))
 									conn1.commit()
 									break
+								row1 = cursor1.fetchone()
 						else:
 							while row1 is not None:
 								if ctx.message.author.id in row1:
@@ -221,6 +222,7 @@ async def upg(ctx):
 									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size-1),ctx.message.author.id))
 									conn1.commit()
 									break
+								row1 = cursor1.fetchone()
 					else:
 						await ctx.message.channel.send("Будет доступно через {0}:{1}:{2}".format(int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))//3600), int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))%3600//60), int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))%3600%60)))
 					break
