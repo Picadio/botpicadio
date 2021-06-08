@@ -2,3 +2,4 @@ discord.py == 1.4.1
 aiohttp
 websockets
 chardet
+psycopg2
