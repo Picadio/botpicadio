@@ -538,7 +538,7 @@ async def on_message(message):
                if message.author.id in row:
                     a=row[1]+10
                     break
-            row = cursor.fetchone()
+           	row = cursor.fetchone()
             cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(a,b))
             conn.commit()
             await message.channel.send("Верно, вам начислено 10 балов")
