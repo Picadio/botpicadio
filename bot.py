@@ -464,22 +464,9 @@ async def on_message(message):
     global p
     t=bool(0)
     if p == 1:
-        if regim==1:
-            if str(message.content) == str(int(c)+int(b)):
-                b=-3918391839
-                c=-7381283912
-                t=bool(1)
-        if regim==2:
-            if str(message.content) == str(int(c)-int(b)):
-                b=-3918391839
-                c=-7381283912
-                t=bool(1)
-        if regim == 3:
-            if str(message.content) == str(int(c)*int(b)):
-                b=-3918391839
-                c=-7381283912
-                t=bool(1)
-        if t == 1:
+        if str(message.content) == str(int(c)+int(b)):
+            b=-3918391839
+            c=-7381283912
             b=message.author.id
     
             conn = psycopg2.connect(dbname=db_name, user=db_user, 
