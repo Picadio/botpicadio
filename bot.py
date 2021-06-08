@@ -5,6 +5,7 @@ import random
 import sqlite3
 import os
 import psycopg2
+import datetime
 b=int(-38918391)
 c=int(-83193912)
 m=int(-63721733)
@@ -166,8 +167,8 @@ async def table_size(ctx):
 async def upg(ctx):
 	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
 		print(1)
-		conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
-                        		password=db_password, host=db_host)
+		conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 		cursor1 = conn1.cursor()
 		cursor1.execute('SELECT * FROM test')
 		row1 = cursor1.fetchone()
@@ -182,32 +183,30 @@ async def upg(ctx):
 		if w1:
 			await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 		else:
-			conn = psycopg2.connect(dbname=db_name, user=db_user, 
-                        		password=db_password, host=db_host)
+			conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 			cursor = conn.cursor()
 			cursor.execute('SELECT * FROM test')
 			row = cursor.fetchone()
 			w=bool(0)
-			print(2)
-			print(row[0])
-			print(ctx.message.author.id)
+			
 			while row is not None:
 				
 				if ctx.message.author.id in row:
 					w=bool(1)
-					print(3)
-					if row[1] >= 100:
-						cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format((row[1]-100),ctx.message.author.id))
+					
+					if (datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()//3600 >= 5:
+						cursor.execute('''UPDATE test SET date_try={0} WHERE id={1}'''.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"),ctx.message.author.id))
 						conn.commit()
-						print(3)
-						r = random.randint(0, size)
-						conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
-                        				password=db_password, host=db_host)
+						
+						r = random.randint(0, int(size/10+1))
+						conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                                            password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
 						if r >= 0 and r <= 10:
-							print(4)
+						
 							while row1 is not None:
 								if ctx.message.author.id in row1:
 									await ctx.message.channel.send(str(ctx.message.author)+" Повезло, +1 см к бибе")
@@ -222,7 +221,7 @@ async def upg(ctx):
 									conn1.commit()
 									break
 					else:
-						await ctx.message.channel.send("Это действие стоит 100. Вам не хватает {} балов".format(100-row[1]))
+						await ctx.message.channel.send("Будет доступно через {0}:{1}:{2}".format(int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))//3600), int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))%3600//60), int((18000-((datetime.datetime.now()-datetime.datetime.strptime(row[3], "%Y%m%d%H%M%S")).total_seconds()))%3600%60)))
 					break
 				
 			if w==0:
@@ -597,8 +596,8 @@ async def set(ctx, user:discord.Member, p, kod):
 @Bot.command(pass_context=True)
 async def reg(ctx):
     b=ctx.message.author.id
-    conn = psycopg2.connect(dbname=db_name, user=db_user, 
-                        		password=db_password, host=db_host)
+    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
     cursor = conn.cursor()
     
     cursor.execute('SELECT * FROM test')
@@ -612,7 +611,9 @@ async def reg(ctx):
             break
         row = cursor.fetchone()
     if q==1:
-        cursor.execute('''INSERT INTO test (id,bal,cm) VALUES ({0},0, 0)'''.format(b))
+        
+
+        cursor.execute('''INSERT INTO test (id,bal,cm,date_try) VALUES ({0},0, 0, {1})'''.format(b, (datetime.datetime.now()-datetime.timedelta(days=1)).strftime("%Y%m%d%H%M%S")) )
         conn.commit()
         await ctx.message.channel.send("Регистрация выполнена упешно")
     cursor.close()
