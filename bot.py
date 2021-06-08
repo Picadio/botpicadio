@@ -257,15 +257,15 @@ async def size(ctx):
 	    		y=bool(1)
 	row = cursor.fetchone()
 	if y==1:
-	cursor.execute('SELECT * FROM test')
-	row = cursor.fetchone()
-	while row is not None:
-	    if ctx.message.author.id in row:
-		await ctx.message.channel.send("Длина бибы:"+str(row[2]))
-		break
-	    row = cursor.fetchone()
+		cursor.execute('SELECT * FROM test')
+		row = cursor.fetchone()
+		while row is not None:
+	    		if ctx.message.author.id in row:
+				await ctx.message.channel.send("Длина бибы:"+str(row[2]))
+				break
+	    	row = cursor.fetchone()
 	else:
-	await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
+		await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 	cursor.close()
 	conn.close()
       
