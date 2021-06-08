@@ -21,19 +21,20 @@ async def on_ready():
 async def playcasino(ctx, color, stavka):
 	if int(stavka) > 0:
 		if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
-			conn = sqlite3.connect("mybase.sqlite")
+			conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        		password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 			cursor = conn.cursor()
 			cursor.execute('SELECT * FROM test')
 			row = cursor.fetchone()
 			w=bool(0)
 			q=bool(0)
 			while row is not None:
-				if str(ctx.message.author.id) in row:
+				if ctx.message.author.id in row:
 					w=bool(1)
 					if row[1] >= int(stavka):
 						money = row[1]-int(stavka)
 						q=bool(1)
-						cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-int(stavka)),ctx.message.author.id,))
+						cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format((row[1]-int(stavka)),ctx.message.author.id))
 						conn.commit()
 					else:
 						await ctx.message.channel.send("Ставка слишком велика, на вашем счету недостаточно баллов!")
@@ -48,52 +49,55 @@ async def playcasino(ctx, color, stavka):
 				print(r)
 				if (r == 0 or r == 1) and color == "green":
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*100))
-					d=str(ctx.message.author.id)
+					d=ctx.message.author.id
 
-					conn = sqlite3.connect("mybase.sqlite")
+					conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        			password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 					cursor = conn.cursor()
 					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
 					while row is not None:
-						if str(ctx.message.author.id) in row:
+						if ctx.message.author.id in row:
 							a=row[1]+int(p)
 							break
 						row = cursor.fetchone()
-					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*100+money),d,))
+					cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(str(int(stavka)*100+money),d))
 					conn.commit()
 					cursor.close()
 					conn.close()
 				elif r >1 and r <= 50 and color == "red":
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
-					d=str(ctx.message.author.id)
+					d=ctx.message.author.id
 
-					conn = sqlite3.connect("mybase.sqlite")
+					conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                       				password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 					cursor = conn.cursor()
 					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
 					while row is not None:
-						if str(ctx.message.author.id) in row:
+						if ctx.message.author.id in row:
 							a=row[1]+int(p)
 							break
 						row = cursor.fetchone()
-					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
+					cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(str(int(stavka)*2+money),d))
 					conn.commit()
 					cursor.close()
 					conn.close()
 				elif r >50 and r <= 100 and color == "black":
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
-					d=str(ctx.message.author.id)
+					d=ctx.message.author.id
 
-					conn = sqlite3.connect("mybase.sqlite")
+					conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        			password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 					cursor = conn.cursor()
 					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
 					while row is not None:
-						if str(ctx.message.author.id) in row:
+						if ctx.message.author.id in row:
 							a=row[1]+int(p)
 							break
 						row = cursor.fetchone()
-					cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(str(int(stavka)*2+money),d,))
+					cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(str(int(stavka)*2+money),d))
 					conn.commit()
 					cursor.close()
 					conn.close()
@@ -104,7 +108,8 @@ async def playcasino(ctx, color, stavka):
 				
 @Bot.command(pass_context=True)
 async def table_bal(ctx):
-	conn = sqlite3.connect("mybase.sqlite")
+	conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
@@ -133,7 +138,8 @@ async def vopros(ctx):
 		await ctx.message.channel.send("Возможно")
 @Bot.command(pass_context=True)
 async def table_size(ctx):
-	conn = sqlite3.connect("twobase.sqlite")
+	conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
@@ -142,7 +148,7 @@ async def table_size(ctx):
 		f = ctx.message.channel.members
 		for line in f:
 			if str(line.id) == row[0]:
-				await ctx.message.channel.send(str(line.name) + " : " + str(row[1]) + " cm")
+				await ctx.message.channel.send(str(line.name) + " : " + str(row[2]) + " cm")
 		row = cursor.fetchone()
 	
 		
@@ -153,52 +159,27 @@ async def table_size(ctx):
 	
 	
 @Bot.command(pass_context=True)
-async def create(ctx):
-	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
-		b=str(ctx.message.author.id)
-		conn = sqlite3.connect("twobase.sqlite")
-		cursor = conn.cursor()
-		try:
-			cursor.execute('''CREATE TABLE test (id text, cm integer)''')
-		except:
-			pass
-		cursor.execute('SELECT * FROM test')
-		row = cursor.fetchone()
-		q=bool(1)
-		while row is not None:
-			if str(ctx.message.author.id) in row:
-				await ctx.message.channel.send("Вы уже создали себя")
-				q=bool(0)
-				break
-			row = cursor.fetchone()
-		if q==1:
-			cursor.execute('''INSERT INTO test (id,cm) VALUES (?,0)''', (b,))
-			conn.commit()
-			await ctx.message.channel.send("Создание выполнено упешно")
-		cursor.close()
-		conn.close()
-
-@Bot.command(pass_context=True)
 async def upg(ctx):
 	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
 		print(1)
-		conn1 = sqlite3.connect("twobase.sqlite")
+		conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 		cursor1 = conn1.cursor()
 		cursor1.execute('SELECT * FROM test')
 		row1 = cursor1.fetchone()
 		w1=bool(1)
 		while row1 is not None:
-			if str(ctx.message.author.id) in row1:
-				size = int(row1[1])
+			if ctx.message.author.id in row1:
+				size = int(row1[2])
 				w1=bool(0)
 				break
-			row1 = cursor1.fetchone()
 		cursor1.close()
 		conn1.close()
 		if w1:
-			await ctx.message.channel.send("Вы не создали себя. Пропишите !create")
+			await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 		else:
-			conn = sqlite3.connect("mybase.sqlite")
+			conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 			cursor = conn.cursor()
 			cursor.execute('SELECT * FROM test')
 			row = cursor.fetchone()
@@ -208,39 +189,37 @@ async def upg(ctx):
 			print(ctx.message.author.id)
 			while row is not None:
 				
-				if str(ctx.message.author.id) in row:
+				if ctx.message.author.id in row:
 					w=bool(1)
 					print(3)
 					if row[1] >= 100:
-						cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-100),ctx.message.author.id,))
+						cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format((row[1]-100),ctx.message.author.id))
 						conn.commit()
 						print(3)
-						r = random.randint(0, 2)
-						conn1 = sqlite3.connect("twobase.sqlite")
+						r = random.randint(0, int(size/10+1))
+						conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                                            password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
-						if r == 0 or r == 1:
+						if r >= 0 and r <= size/10:
 							print(4)
 							while row1 is not None:
-								if str(ctx.message.author.id) in row1:
-									await ctx.message.channel.send(str(ctx.message.author.name)+" Повезло, +1 см к бибе")
-									cursor1.execute('''UPDATE test SET cm=? WHERE id=?''',((size+1),ctx.message.author.id,))
+								if ctx.message.author.id in row1:
+									await ctx.message.channel.send(str(ctx.message.author)+" Повезло, +1 см к бибе")
+									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size+1),ctx.message.author.id))
 									conn1.commit()
 									break
-								row1 = cursor1.fetchone()
 						else:
 							while row1 is not None:
-								if str(ctx.message.author.id) in row1:
-									await ctx.message.channel.send(str(ctx.message.author.name)+" Не повезло, -1 см от бибы")
-									cursor1.execute('''UPDATE test SET cm=? WHERE id=?''',((size-1),ctx.message.author.id,))
+								if ctx.message.author.id in row1:
+									await ctx.message.channel.send(str(ctx.message.author)+" Не повезло, -1 см от бибы")
+									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size-1),ctx.message.author.id))
 									conn1.commit()
 									break
-								row1 = cursor1.fetchone()
 					else:
 						await ctx.message.channel.send("Это действие стоит 100. Вам не хватает {} балов".format(100-row[1]))
 					break
-				row = cursor.fetchone()
 				
 			if w==0:
 				await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
@@ -249,11 +228,12 @@ async def upg(ctx):
 @Bot.command(pass_context=True)
 async def set_size(ctx, user:discord.Member, p):
 	if "343279631807545356" == str(ctx.message.author.id):
-		d=str(user.id)
+		d=user.id
 		await ctx.message.delete()
-		conn = sqlite3.connect("twobase.sqlite")
+		conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 		cursor = conn.cursor()
-		cursor.execute('''UPDATE test SET cm=? WHERE id=?''',(p,d,))
+		cursor.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format(p,d))
 		conn.commit()
 		await ctx.message.channel.send("Длина бибы у игрока {} изменена на {}".format(user.name, p))
 
@@ -265,26 +245,26 @@ async def set_size(ctx, user:discord.Member, p):
 
 @Bot.command(pass_context=True)
 async def size(ctx):
-	conn = sqlite3.connect("twobase.sqlite")
+	conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+			password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
 	y=bool(0)
 	while row is not None:
-		if str(ctx.message.author.id) in row:
-			y=bool(1)
-			break
-		row = cursor.fetchone()
+	if ctx.message.author.id in row:
+	    y=bool(1)
+	row = cursor.fetchone()
 	if y==1:
-		cursor.execute('SELECT * FROM test')
-		row = cursor.fetchone()
-		while row is not None:
-			if str(ctx.message.author.id) in row:
-				await ctx.message.channel.send("Длина бибы:"+str(row[1])+" см")
-				break
-			row = cursor.fetchone()
+	cursor.execute('SELECT * FROM test')
+	row = cursor.fetchone()
+	while row is not None:
+	    if ctx.message.author.id in row:
+		await ctx.message.channel.send("Длина бибы:"+str(row[2]))
+		break
+	    row = cursor.fetchone()
 	else:
-		await ctx.message.channel.send("Вы не создали себя. Пропишите !create")
+	await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 	cursor.close()
 	conn.close()
       
@@ -329,16 +309,17 @@ async def buy(ctx,role:discord.Role):
         await ctx.message.channel.send("Роль уже куплена")
     elif str(role) == "Доступ":
         
-        conn = sqlite3.connect("mybase.sqlite")
+        conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM test')
         row = cursor.fetchone()
         w=bool(0)
         while row is not None:
-            if str(ctx.message.author.id) in row:
+            if ctx.message.author.id in row:
                 w=bool(1)
                 if row[1] >= 1000:
-                    cursor.execute('''UPDATE test SET bal=? WHERE id=?''',((row[1]-1000),ctx.message.author.id,))
+                    cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format((row[1]-1000),ctx.message.author.id))
                     conn.commit()
                     await discord.Member.add_roles(ctx.message.author, role)
                     await ctx.message.channel.send("Покупка прошла успешно")
@@ -365,15 +346,15 @@ async def playeasy(ctx):
     global c
     global p
     global r
-    
-    r=str(ctx.message.author.id)
-    conn = sqlite3.connect("mybase.sqlite")
+    r=ctx.message.author.id
+    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
     w=bool(0)
     while row is not None:
-        if str(ctx.message.author.id) in row:
+        if ctx.message.author.id in row:
             
             w=bool(1)
         row = cursor.fetchone()
@@ -395,14 +376,15 @@ async def playmedium(ctx):
     global c
     global p
     global r
-    r=str(ctx.message.author.id)
-    conn = sqlite3.connect("mybase.sqlite")
+    r=ctx.message.author.id
+    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
     w=bool(0)
     while row is not None:
-        if str(ctx.message.author.id) in row:
+        if ctx.message.author.id in row:
             
             w=bool(1)
         row = cursor.fetchone()
@@ -423,27 +405,21 @@ async def playhard(ctx):
     global c
     global p
     global r
-    global regim
     r=ctx.message.author.id
-    conn = sqlite3.connect("mybase.sqlite")
+    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
     w=bool(0)
     while row is not None:
-        if str(ctx.message.author.id) in row:
+        if ctx.message.author.id in row:
             w=bool(1)
         row = cursor.fetchone()
     if w==1:
-        b = random.randint(100000,1000000)
-        c = random.randint(100000,1000000)
-        regim = random.randint(1,2)
-        if regim == 1:
-            await ctx.message.channel.send( "{} + {}".format(c, b))
-        if regim == 2:
-            await ctx.message.channel.send( "{} - {}".format(c, b))
-        if regim == 3:
-            await ctx.message.channel.send( "{} * {}".format(c, b))
+        b = random.randint(100000,10000000)
+        c = random.randint(100000,10000000)
+        await ctx.message.channel.send( "{} + {}".format(b, c))
         p=1
     else:
         await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
@@ -454,20 +430,21 @@ async def playhard(ctx):
 
 @Bot.command(pass_context=True)
 async def bal(ctx):
-    conn = sqlite3.connect("mybase.sqlite")
+    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
     y=bool(0)
     while row is not None:
-        if str(ctx.message.author.id) in row:
+        if ctx.message.author.id in row:
             y=bool(1)
         row = cursor.fetchone()
     if y==1:
         cursor.execute('SELECT * FROM test')
         row = cursor.fetchone()
         while row is not None:
-            if str(ctx.message.author.id) in row:
+            if ctx.message.author.id in row:
                 await ctx.message.channel.send("Ваш баланс:"+str(row[1]))
                 break
             row = cursor.fetchone()
@@ -476,20 +453,12 @@ async def bal(ctx):
     cursor.close()
     conn.close()
 
-
-
-@Bot.command(pass_context=True)
-async def id(ctx,user:discord.Member):
-    await ctx.message.channel.send("ID:{}".format(user.id))
-
-
     
 @Bot.event
 async def on_message(message):
     global b
     global c
     global p
-    
     t=bool(0)
     if p == 1:
         if regim==1:
@@ -502,20 +471,25 @@ async def on_message(message):
                 b=-3918391839
                 c=-7381283912
                 t=bool(1)
-      
+        if regim == 3:
+            if str(message.content) == str(int(c)*int(b)):
+                b=-3918391839
+                c=-7381283912
+                t=bool(1)
         if t == 1:
-            b=str(message.author.id)
+            b=message.author.id
     
-            conn = sqlite3.connect("mybase.sqlite")
+            conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
             while row is not None:
-                if str(message.author.id) in row:
+                if message.author.id in row:
                     a=row[1]+20
                     break
                 row = cursor.fetchone()
-            cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(a,b,))
+            cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(a,b))
             conn.commit()
             await message.channel.send("Верно, вам начислено 20 балов")
     
@@ -528,18 +502,19 @@ async def on_message(message):
         if str(message.content) == str(int(c)+int(b)):
             b=-3918391839
             c=-7381283912
-            b=str(message.author.id)
+            b=message.author.id
     
-            conn = sqlite3.connect("mybase.sqlite")
+            conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
             while row is not None:
-                if str(message.author.id) in row:
+                if message.author.id in row:
                     a=row[1]+2
                     break
                 row = cursor.fetchone()
-            cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(a,b,))
+            cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(a,b))
             conn.commit()
             await message.channel.send("Верно, вам начислено 2 бала")
     
@@ -549,18 +524,19 @@ async def on_message(message):
         if str(message.content) == str(int(c)+int(b)):
             b=-3918391839
             c=-7381283912
-            b=str(message.author.id)
+            b=message.author.id
     
-            conn = sqlite3.connect("mybase.sqlite")
+            conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
             while row is not None:
-                if str(message.author.id) in row:
+               if message.author.id in row:
                     a=row[1]+10
                     break
-                row = cursor.fetchone()
-            cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(a,b,))
+            row = cursor.fetchone()
+            cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(a,b))
             conn.commit()
             await message.channel.send("Верно, вам начислено 10 балов")
     
@@ -572,67 +548,67 @@ async def on_message(message):
    
 pas = os.environ.get("KOD")
 @Bot.command(pass_context=True)
-async def popln(ctx, user:discord.Member, p):
-	if "343279631807545356" == str(ctx.message.author.id):
-		d=str(user.id)
-		await ctx.message.delete()
-		conn = sqlite3.connect("mybase.sqlite")
-		cursor = conn.cursor()
-		cursor.execute('SELECT * FROM test')
-		row = cursor.fetchone()
-		while row is not None:
-			if str(user.id) in row:
-				a=row[1]+int(p)
-				break
-			row = cursor.fetchone()
-		cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(a,d,))
-		conn.commit()
-		await ctx.message.channel.send("Баланс игрока {} пополнен на {} балов".format(user.name, p))
-
-
-		cursor.close()
-		conn.close()
-	else:
-		await ctx.message.channel.send("У вас нет прав для выполнения этой команды")
-
+async def popln(ctx, user:discord.Member, p, kod):
+    if str(kod) == "f12ua":
+        d=user.id
+        await ctx.message.delete()
+        conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM test')
+        row = cursor.fetchone()
+        while row is not None:
+            if user.id in row:
+                a=row[1]+int(p)
+                break
+            row = cursor.fetchone()
+        cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(a,d))
+        conn.commit()
+        await ctx.message.channel.send("Баланс игрока {} пополнен на {} балов".format(user.name, p))
+        print("Balance add:{} {}".format(p, user.name))
+        
+        cursor.close()
+        conn.close()
+    else:
+        await ctx.message.channel.send("Код неверный!!!")
 @Bot.command(pass_context=True)
-async def set(ctx, user:discord.Member, p):
-	if "343279631807545356" == str(ctx.message.author.id):
-		d=str(user.id)
-		await ctx.message.delete()
-		conn = sqlite3.connect("mybase.sqlite")
-		cursor = conn.cursor()
-		cursor.execute('''UPDATE test SET bal=? WHERE id=?''',(p,d,))
-		conn.commit()
-		await ctx.message.channel.send("Баланс игрока {} установлен на {}".format(user.name, p))
-
-
-		cursor.close()
-		conn.close()
-	else:
-		await ctx.message.channel.send("У вас нет прав для выполнения этой команды")
+async def set(ctx, user:discord.Member, p, kod):
+    if str(kod) == "f12ua":
+        d=user.id
+        await ctx.message.delete()
+        conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+        cursor = conn.cursor()
+        cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(p,d))
+        conn.commit()
+        await ctx.message.channel.send("Баланс игрока {} установлен на {}".format(user.name, p))
+        
+        
+        cursor.close()
+        conn.close()
+    else:
+        await ctx.message.channel.send("Код неверный!!!")  
 
 
 @Bot.command(pass_context=True)
 async def reg(ctx):
-    b=str(ctx.message.author.id)
-    conn = sqlite3.connect("mybase.sqlite")
+    b=ctx.message.author.id
+    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
+                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
     cursor = conn.cursor()
-    try:
-        cursor.execute('''CREATE TABLE test (id text, bal integer)''')
-    except:
-        pass
+    
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
+
     q=bool(1)
     while row is not None:
-        if str(ctx.message.author.id) in row:
+        if ctx.message.author.id in row:
             await ctx.message.channel.send("Вы уже зарегистрированы")
             q=bool(0)
             break
         row = cursor.fetchone()
     if q==1:
-        cursor.execute('''INSERT INTO test (id,bal) VALUES (?,0)''', (b,))
+        cursor.execute('''INSERT INTO test (id,bal,cm) VALUES ({0},0, 0)'''.format(b))
         conn.commit()
         await ctx.message.channel.send("Регистрация выполнена упешно")
     cursor.close()
