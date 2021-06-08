@@ -13,7 +13,10 @@ p=int(0)
 r=0
 stavka = int(0)
 color = str("")
-
+db_host = os.environ.get("HOST")
+db_name = os.environ.get("DB")
+db_user = os.environ.get("USER")
+db_password = os.environ.get("PASSWORD")
 Bot = commands.Bot(command_prefix='!')
 @Bot.event
 async def on_ready():
@@ -22,8 +25,8 @@ async def on_ready():
 async def playcasino(ctx, color, stavka):
 	if int(stavka) > 0:
 		if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
-			conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        		password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+			conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
 			cursor = conn.cursor()
 			cursor.execute('SELECT * FROM test')
 			row = cursor.fetchone()
@@ -52,8 +55,8 @@ async def playcasino(ctx, color, stavka):
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*100))
 					d=ctx.message.author.id
 
-					conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        			password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+					conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        			password=db_password, host=db_host)
 					cursor = conn.cursor()
 					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
@@ -70,8 +73,8 @@ async def playcasino(ctx, color, stavka):
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
 					d=ctx.message.author.id
 
-					conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                       				password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+					conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        			password=db_password, host=db_host)
 					cursor = conn.cursor()
 					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
@@ -88,8 +91,8 @@ async def playcasino(ctx, color, stavka):
 					await ctx.message.channel.send("Поздравляю вы выиграли +" + str(int(stavka)*2))
 					d=ctx.message.author.id
 
-					conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        			password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+					conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        			password=db_password, host=db_host)
 					cursor = conn.cursor()
 					cursor.execute('SELECT * FROM test')
 					row = cursor.fetchone()
@@ -109,8 +112,8 @@ async def playcasino(ctx, color, stavka):
 				
 @Bot.command(pass_context=True)
 async def table_bal(ctx):
-	conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+	conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        password=db_password, host=db_host)
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
@@ -139,8 +142,8 @@ async def vopros(ctx):
 		await ctx.message.channel.send("Возможно")
 @Bot.command(pass_context=True)
 async def table_size(ctx):
-	conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+	conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        	password=db_password, host=db_host)
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
@@ -163,8 +166,8 @@ async def table_size(ctx):
 async def upg(ctx):
 	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "играть-с-ботом":
 		print(1)
-		conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+		conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
 		cursor1 = conn1.cursor()
 		cursor1.execute('SELECT * FROM test')
 		row1 = cursor1.fetchone()
@@ -179,8 +182,8 @@ async def upg(ctx):
 		if w1:
 			await ctx.message.channel.send("Вы не зарегистрированы. Пропишите !reg")
 		else:
-			conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+			conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
 			cursor = conn.cursor()
 			cursor.execute('SELECT * FROM test')
 			row = cursor.fetchone()
@@ -198,8 +201,8 @@ async def upg(ctx):
 						conn.commit()
 						print(3)
 						r = random.randint(0, int(size/10+1))
-						conn1 = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                                            password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+						conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
+                        				password=db_password, host=db_host)
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
@@ -231,8 +234,8 @@ async def set_size(ctx, user:discord.Member, p):
 	if "343279631807545356" == str(ctx.message.author.id):
 		d=user.id
 		await ctx.message.delete()
-		conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+		conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
 		cursor = conn.cursor()
 		cursor.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format(p,d))
 		conn.commit()
@@ -246,8 +249,8 @@ async def set_size(ctx, user:discord.Member, p):
 
 @Bot.command(pass_context=True)
 async def size(ctx):
-    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
@@ -310,8 +313,8 @@ async def buy(ctx,role:discord.Role):
         await ctx.message.channel.send("Роль уже куплена")
     elif str(role) == "Доступ":
         
-        conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+        conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM test')
         row = cursor.fetchone()
@@ -348,8 +351,8 @@ async def playeasy(ctx):
     global p
     global r
     r=ctx.message.author.id
-    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
@@ -378,8 +381,8 @@ async def playmedium(ctx):
     global p
     global r
     r=ctx.message.author.id
-    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
@@ -407,8 +410,8 @@ async def playhard(ctx):
     global p
     global r
     r=ctx.message.author.id
-    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
@@ -431,8 +434,8 @@ async def playhard(ctx):
 
 @Bot.command(pass_context=True)
 async def bal(ctx):
-    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM test')
     row = cursor.fetchone()
@@ -480,8 +483,8 @@ async def on_message(message):
         if t == 1:
             b=message.author.id
     
-            conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+            conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
@@ -505,8 +508,8 @@ async def on_message(message):
             c=-7381283912
             b=message.author.id
     
-            conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+            conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
@@ -527,8 +530,8 @@ async def on_message(message):
             c=-7381283912
             b=message.author.id
     
-            conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+            conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM test')
             row = cursor.fetchone()
@@ -553,8 +556,8 @@ async def popln(ctx, user:discord.Member, p, kod):
     if str(kod) == "f12ua":
         d=user.id
         await ctx.message.delete()
-        conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+        conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM test')
         row = cursor.fetchone()
@@ -577,8 +580,8 @@ async def set(ctx, user:discord.Member, p, kod):
     if str(kod) == "f12ua":
         d=user.id
         await ctx.message.delete()
-        conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+        conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
         cursor = conn.cursor()
         cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format(p,d))
         conn.commit()
@@ -594,8 +597,8 @@ async def set(ctx, user:discord.Member, p, kod):
 @Bot.command(pass_context=True)
 async def reg(ctx):
     b=ctx.message.author.id
-    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
     cursor = conn.cursor()
     
     cursor.execute('SELECT * FROM test')
@@ -649,7 +652,6 @@ async def help(ctx):
 	await ctx.message.channel.send("!bal - посмотреть свой баланс")
 	await ctx.message.channel.send("!playhard / !playmedium / !playeasy - решить пример определёной сложности(дают баллы)")
 	await ctx.message.channel.send("!buy Доступ - купить роль Доступ")
-	await ctx.message.channel.send("!create - создать перса")
 	await ctx.message.channel.send("!upg - прокачать бибу персу")
 	await ctx.message.channel.send("!size - узнать размер своей бибы")
 	await ctx.message.channel.send("!playcasino цвет(red/black/green) ставка - сыграть в казино на баллы")
