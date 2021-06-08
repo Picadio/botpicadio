@@ -200,13 +200,13 @@ async def upg(ctx):
 						cursor.execute('''UPDATE test SET bal={0} WHERE id={1}'''.format((row[1]-100),ctx.message.author.id))
 						conn.commit()
 						print(3)
-						r = random.randint(0, int(size/10+1))
+						r = random.randint(0, size)
 						conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
                         				password=db_password, host=db_host)
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
-						if r >= 0 and r <= size//10:
+						if r >= 0 and r <= 10:
 							print(4)
 							while row1 is not None:
 								if ctx.message.author.id in row1:
