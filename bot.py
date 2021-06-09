@@ -640,20 +640,10 @@ async def spam(ctx, member: discord.Member, text, colvo, lichka):
 @Bot.remove_command("help")
 @Bot.command(pass_context=True)
 async def help(ctx):
-	await ctx.message.channel.send("!info @учасник - инфа про учасника")
-	await ctx.message.channel.send("!reg - регистрация в боте, для взаимодействия с ним")
-	await ctx.message.channel.send("!bal - посмотреть свой баланс")
-	await ctx.message.channel.send("!playhard / !playmedium / !playeasy - решить пример определёной сложности(дают баллы)")
-	await ctx.message.channel.send("!buy Доступ - купить роль Доступ")
-	await ctx.message.channel.send("!upg - прокачать бибу персу")
-	await ctx.message.channel.send("!size - узнать размер своей бибы")
-	await ctx.message.channel.send("!playcasino цвет(red/black/green) ставка - сыграть в казино на баллы")
-	await ctx.message.channel.send("!table_bal - топ по балам")
-	await ctx.message.channel.send("!table_size - топ по размеру бибы")
-	await ctx.message.channel.send("!vopros текст - ответ на вопрос(да/нет/возможно)")
-	await ctx.message.channel.send("!Puma / !Puma_full - ...")
-	await ctx.message.channel.send("!logika - ...")
-    
+	emb=discord.Embed(title="Команды", colour= 0x39d0d6)
+	emb.add_field(name="----------------------------------------------------------------------------", value="!info @учасник - инфа про учасника\n !reg - регистрация в боте, для взаимодействия с ним\n !bal - посмотреть свой баланс\n !playhard / !playmedium / !playeasy - решить пример определёной сложности(дают баллы)\n !buy Доступ - купить роль Доступ\n !upg - прокачать бибу персу\n !size - узнать размер своей бибы\n !playcasino цвет(red/black/green) ставка - сыграть в казино на баллы\n !vopros текст - ответ на вопрос(да/нет/возможно)")
+
+	await ctx.message.channel.send(embed=emb)
     
         
 
