@@ -641,7 +641,7 @@ async def spam(ctx, member: discord.Member, text, colvo, lichka):
 @Bot.command(pass_context=True)
 async def help(ctx):
 	emb=discord.Embed(title="Команды", colour= 0x39d0d6)
-	emb.add_field(name="----------------------------------------------------------------------------", value="!info @учасник - инфа про учасника\n\n !reg - регистрация в боте, для взаимодействия с ним\n !bal - посмотреть свой баланс\n !playhard / !playmedium / !playeasy - решить пример определёной сложности(дают баллы)\n !buy Доступ - купить роль Доступ\n !upg - прокачать бибу персу\n !size - узнать размер своей бибы\n !playcasino цвет(red/black/green) ставка - сыграть в казино на баллы\n !vopros текст - ответ на вопрос(да/нет/возможно)")
+	emb.add_field(name="----------------------------------------------------------------------------", value="!info @учасник - инфа про учасника\n\n !reg - регистрация в боте, для взаимодействия с ним\n\n !bal - посмотреть свой баланс\n\n !playhard / !playmedium / !playeasy - решить пример определёной сложности(дают баллы)\n\n !buy Доступ - купить роль Доступ\n\n !upg - прокачать бибу персу\n\n !size - узнать размер своей бибы\n\n !playcasino цвет(red/black/green) ставка - сыграть в казино на баллы\n\n !vopros текст - ответ на вопрос(да/нет/возможно)")
 
 	await ctx.message.channel.send(embed=emb)
     
