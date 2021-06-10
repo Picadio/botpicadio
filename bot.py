@@ -615,14 +615,7 @@ async def reg(ctx):
 
 
     
-@Bot.command(pass_context=True)
-async def info(ctx, member: discord.Member):
-    emb=discord.Embed(title="Info", colour= 0x39d0d6)
-    emb.add_field(name="Ник", value=member.name)
-    emb.add_field(name="Присоединился", value=member.joined_at.strftime("%A, %B %d %Y @ %H:%M:%S %p"))
-    emb.set_thumbnail(url= member.avatar_url)
-    emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
-    await ctx.message.channel.send(embed=emb)
+
 
 
 @Bot.command(pass_context=True)
