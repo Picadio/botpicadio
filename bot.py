@@ -118,16 +118,16 @@ async def table_bal(ctx):
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
-	
+	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6)
 	while row is not None:
 		f = ctx.message.channel.members
 		for line in f:
 			if line.id == row[0]:
-				await ctx.message.channel.send(str(line.name) + " : " + str(row[1]))
-			
+				emb.add_field(name=str(line.name)+" : ", value=str(row[1]))
 		row = cursor.fetchone()
 	
-		
+	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
+	await ctx.message.channel.send(embed=emb)	
 
 	cursor.close()
 	conn.close()
@@ -149,15 +149,16 @@ async def table_size(ctx):
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
-	
+	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6)
 	while row is not None:
 		f = ctx.message.channel.members
 		for line in f:
 			if line.id in row:
-				await ctx.message.channel.send(str(line.name) + " : " + str(row[2]) + " cm")
+				emb.add_field(name=str(line.name)+" : ", value=str(row[2])+" cm")
 		row = cursor.fetchone()
 	
-		
+	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
+	await ctx.message.channel.send(embed=emb)	
 
 	cursor.close()
 	conn.close()
