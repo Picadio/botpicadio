@@ -118,7 +118,7 @@ async def table_bal(ctx):
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
-	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6)
+	emb=discord.Embed(title="Топ по баллам", colour= 0x39d0d6)
 	while row is not None:
 		f = ctx.message.channel.members
 		for line in f:
