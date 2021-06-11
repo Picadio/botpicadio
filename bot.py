@@ -14,10 +14,16 @@ p=int(0)
 r=0
 stavka = int(0)
 color = str("")
-db_host = os.environ.get("HOST")
-db_name = os.environ.get("DB")
-db_user = os.environ.get("USER")
-db_password = os.environ.get("PASSWORD")
+
+db_url = str(os.environ.get("DATABASE_URL"))
+db_url=db_url.replace("postgres://", "")
+x=db_url.split(":")
+db_user=x[0]
+db_password=x[1].split("@")[0]
+db_host=x[1].split("@")[1]
+db_name=x[2].split("/")[1]
+
+
 Bot = commands.Bot(command_prefix='!')
 @Bot.event
 async def on_ready():
@@ -589,8 +595,8 @@ async def set(ctx, user:discord.Member, p, kod):
 @Bot.command(pass_context=True)
 async def reg(ctx):
     b=ctx.message.author.id
-    conn = psycopg2.connect(dbname='dfmkqq8ssnv68e', user='iazenzesxhwbhy', 
-                        password='e0a05bb55596faeb13355ce8bfa246b4cf5df80c8f4fe21c65b4ef4cbb887c1c', host='ec2-54-229-68-88.eu-west-1.compute.amazonaws.com')
+    conn = psycopg2.connect(dbname=db_name, user=db_user, 
+                        		password=db_password, host=db_host)
     cursor = conn.cursor()
     
     cursor.execute('SELECT * FROM test')
