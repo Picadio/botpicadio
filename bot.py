@@ -173,7 +173,7 @@ async def table_size(ctx):
 	
 @Bot.command(pass_context=True)
 async def upg(ctx):
-	if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "⚡│играть-с-ботом":
+	if str(ctx.message.channel) == "⛔│админские-настройки" or str(ctx.message.channel) == "⚡│играть-с-ботом":
 		print(1)
 		conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
                         		password=db_password, host=db_host)
