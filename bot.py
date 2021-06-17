@@ -166,10 +166,10 @@ async def table_size(ctx):
 	s.reverse()
 	
 	for i in range(10):
-	    f = ctx.message.channel.members
-	    for line in f:
-		if line.id == s[i][0]:
-		    strin += str(line.name)+" : "+str(s[i][1])+"\n"
+		f = ctx.message.channel.members
+		for line in f:
+			if line.id == s[i][0]:
+			strin += str(line.name)+" : "+str(s[i][1])+"\n"
 	emb.add_field(name="TOP", value=strin)
 	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
 	await ctx.message.channel.send(embed=emb)  
