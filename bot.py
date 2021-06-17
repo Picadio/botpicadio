@@ -120,20 +120,33 @@ async def playcasino(ctx, color, stavka):
 @Bot.command(pass_context=True)
 async def table_bal(ctx):
 	conn = psycopg2.connect(dbname=db_name, user=db_user, 
-                        password=db_password, host=db_host)
+                        	password=db_password, host=db_host)
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
-	emb=discord.Embed(title="Топ по баллам", colour= 0x39d0d6)
-	while row is not None:
-		f = ctx.message.channel.members
-		for line in f:
-			if line.id == row[0]:
-				emb.add_field(name=str(line.name)+" : ", value=str(row[1]))
-		row = cursor.fetchone()
 	
+	s=[]
+	ss=["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"]
+	while row is not None:
+    
+	    s.append((row[0], row[1]))
+
+	    row = cursor.fetchone()
+	s.sort(key=lambda x: x[1])
+	s.reverse()
+	strin=""
+	for i in range(5):
+		f = ctx.guild.members
+		
+		if len(s) > i:
+			for line in f:
+				if line.id == s[i][0]:
+					strin += ss[i]+" "+str(line.name)+": "+str(s[i][1])+" CM\n\n"
+		else:
+			strin += ss[i]+" None"+"\n\n"
+	emb=discord.Embed(title="𝐓𝐎𝐏 по баллам", colour= 0x39d0d6, description = strin)
 	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
-	await ctx.message.channel.send(embed=emb)	
+	await ctx.message.channel.send(embed=emb)  
 
 	cursor.close()
 	conn.close()
