@@ -167,6 +167,7 @@ async def table_size(ctx):
 	strin=""
 	for i in range(10):
 		f = ctx.message.channel.members
+		print(s[i][1])
 		if len(s) > i-2:
 			for line in f:
 				if line.id == s[i][0]:
