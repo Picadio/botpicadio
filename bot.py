@@ -166,7 +166,7 @@ async def table_size(ctx):
 	s.reverse()
 	strin=""
 	for i in range(5):
-		f = ctx.message.channel.members
+		f = ctx.guild.members
 		
 		if len(s) > i:
 			for line in f:
