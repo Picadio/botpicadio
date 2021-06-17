@@ -171,9 +171,9 @@ async def table_size(ctx):
 		if len(s) > i:
 			for line in f:
 				if line.id == s[i][0]:
-					strin += "▫ "+str(line.name)+": "+str(s[i][1])+" CM\n"
+					strin += "▫ "+str(line.name)+": "+str(s[i][1])+" CM\n\n"
 		else:
-			strin += "None"+"\n"
+			strin += "▫ None"+"\n\n"
 	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6, description = strin)
 	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
 	await ctx.message.channel.send(embed=emb)  
