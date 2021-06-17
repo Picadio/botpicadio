@@ -155,7 +155,7 @@ async def table_size(ctx):
 	cursor = conn.cursor()
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
-	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6)
+	
 	s=[]
 	while row is not None:
     
@@ -174,7 +174,7 @@ async def table_size(ctx):
 					strin += str(line.name)+" : "+str(s[i][1])+"\n"
 		else:
 			strin += "None"+"\n"
-	emb.add_field(name="TOP", value=strin)
+	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6, description = strin)
 	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
 	await ctx.message.channel.send(embed=emb)  
 
