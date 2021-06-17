@@ -164,7 +164,7 @@ async def table_size(ctx):
 	    row = cursor.fetchone()
 	s.sort(key=lambda x: x[1])
 	s.reverse()
-	
+	strin=""
 	for i in range(10):
 		f = ctx.message.channel.members
 		for line in f:
