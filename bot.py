@@ -157,6 +157,7 @@ async def table_size(ctx):
 	row = cursor.fetchone()
 	
 	s=[]
+	ss=["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"]
 	while row is not None:
     
 	    s.append((row[0], row[2]))
@@ -171,10 +172,10 @@ async def table_size(ctx):
 		if len(s) > i:
 			for line in f:
 				if line.id == s[i][0]:
-					strin += "▫ "+str(line.name)+": "+str(s[i][1])+" CM\n\n"
+					strin += ss[i]+" "+str(line.name)+": "+str(s[i][1])+" CM\n\n"
 		else:
-			strin += "▫ None"+"\n\n"
-	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6, description = strin)
+			strin += ss[i]+" None"+"\n\n"
+	emb=discord.Embed(title="𝕋𝕆ℙ по бибе", colour= 0x39d0d6, description = strin)
 	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
 	await ctx.message.channel.send(embed=emb)  
 
