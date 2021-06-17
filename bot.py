@@ -165,9 +165,9 @@ async def table_size(ctx):
 	s.sort(key=lambda x: x[1])
 	s.reverse()
 	strin=""
-	for i in range(10):
+	for i in range(5):
 		f = ctx.message.channel.members
-		print(str(i)+" "+str(len(s)))
+		
 		if len(s) > i:
 			for line in f:
 				if line.id == s[i][0]:
