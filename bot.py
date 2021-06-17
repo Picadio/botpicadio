@@ -141,7 +141,7 @@ async def table_bal(ctx):
 		if len(s) > i:
 			for line in f:
 				if line.id == s[i][0]:
-					strin += ss[i]+" "+str(line.name)+": "+str(s[i][1])+" CM\n\n"
+					strin += ss[i]+" "+str(line.name)+": "+str(s[i][1])+"\n\n"
 		else:
 			strin += ss[i]+" None"+"\n\n"
 	emb=discord.Embed(title="𝐓𝐎𝐏 по баллам", colour= 0x39d0d6, description = strin)
