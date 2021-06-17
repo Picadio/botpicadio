@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 import random
-import sqlite3
+
 import os
 import psycopg2
 import datetime
@@ -31,7 +31,7 @@ async def on_ready():
 @Bot.command(pass_context=True)
 async def playcasino(ctx, color, stavka):
 	if int(stavka) > 0:
-		if str(ctx.message.channel) == "админские-настройки" or str(ctx.message.channel) == "⚡│играть-с-ботом":
+		if str(ctx.message.channel) == "⛔│админские-настройки" or str(ctx.message.channel) == "⚡│играть-с-ботом":
 			conn = psycopg2.connect(dbname=db_name, user=db_user, 
                         		password=db_password, host=db_host)
 			cursor = conn.cursor()
@@ -156,15 +156,23 @@ async def table_size(ctx):
 	cursor.execute('SELECT * FROM test')
 	row = cursor.fetchone()
 	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6)
+	s=[]
 	while row is not None:
-		f = ctx.message.channel.members
-		for line in f:
-			if line.id in row:
-				emb.add_field(name=str(line.name)+" : ", value=str(row[2])+" cm")
-		row = cursor.fetchone()
+    
+	    s.append((row[0], row[2]))
+
+	    row = cursor.fetchone()
+	s.sort(key=lambda x: x[1])
+	s.reverse()
 	
+	for i in range(10):
+	    f = ctx.message.channel.members
+	    for line in f:
+		if line.id == s[i][0]:
+		    strin += str(line.name)+" : "+str(s[i][1])+"\n"
+	emb.add_field(name="TOP", value=strin)
 	emb.set_footer(text="Вызвано:{}".format(ctx.message.author.name),icon_url=ctx.message.author.avatar_url)
-	await ctx.message.channel.send(embed=emb)	
+	await ctx.message.channel.send(embed=emb)  
 
 	cursor.close()
 	conn.close()
