@@ -171,7 +171,7 @@ async def table_size(ctx):
 		if len(s) > i:
 			for line in f:
 				if line.id == s[i][0]:
-					strin += "💠 "+str(line.name)+": "+str(s[i][1])+" CM\n\n"
+					strin += "▪ "+str(line.name)+": "+str(s[i][1])+" CM\n\n"
 		else:
 			strin += "None"+"\n"
 	emb=discord.Embed(title="Топ по бибе", colour= 0x39d0d6, description = strin)
