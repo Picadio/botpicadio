@@ -234,17 +234,17 @@ async def upg(ctx):
 						cursor.execute('''UPDATE test SET date_try={0} WHERE id={1}'''.format(datetime.datetime.now().strftime("%Y%m%d%H%M%S"),ctx.message.author.id))
 						conn.commit()
 						
-						r = random.randint(0, int(size/10+1))
+						r = random.randint(0, int(size))
 						conn1 = psycopg2.connect(dbname=db_name, user=db_user, 
                         				password=db_password, host=db_host)
 						cursor1 = conn1.cursor()
 						cursor1.execute('SELECT * FROM test')
 						row1 = cursor1.fetchone()
-						if r >= 0 and r <= 10:
+						if r >= 0 and r <= 1:
 						
 							while row1 is not None:
 								if ctx.message.author.id in row1:
-									await ctx.message.channel.send(str(ctx.message.author.mention)+" Повезло, +1 см к бибе")
+									await ctx.message.channel.send(str(ctx.message.author.mention)+" Повезло, +1 см к бибе, был шанс {1}%".format((2/size+1)*100)))
 									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size+1),ctx.message.author.id))
 									conn1.commit()
 									break
@@ -252,7 +252,7 @@ async def upg(ctx):
 						else:
 							while row1 is not None:
 								if ctx.message.author.id in row1:
-									await ctx.message.channel.send(str(ctx.message.author.mention)+" Не повезло, -1 см от бибы")
+									await ctx.message.channel.send(str(ctx.message.author.mention)+" Не повезло, -1 см от бибы, был шанс {1}%".format((2/size+1)*100)))
 									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size-1),ctx.message.author.id))
 									conn1.commit()
 									break
