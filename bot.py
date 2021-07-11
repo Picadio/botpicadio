@@ -244,7 +244,7 @@ async def upg(ctx):
 						
 							while row1 is not None:
 								if ctx.message.author.id in row1:
-									await ctx.message.channel.send(str(ctx.message.author.mention)+" Повезло, +1 см к бибе, был шанс {1}%".format((2/(size+1))*100))
+									await ctx.message.channel.send(str(ctx.message.author.mention)+" Повезло, +1 см к бибе")
 									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size+1),ctx.message.author.id))
 									conn1.commit()
 									break
@@ -252,7 +252,7 @@ async def upg(ctx):
 						else:
 							while row1 is not None:
 								if ctx.message.author.id in row1:
-									await ctx.message.channel.send(str(ctx.message.author.mention)+" Не повезло, -1 см от бибы, был шанс {1}%".format((2/(size+1))*100))
+									await ctx.message.channel.send(str(ctx.message.author.mention)+" Не повезло, -1 см от бибы")
 									cursor1.execute('''UPDATE test SET cm={0} WHERE id={1}'''.format((size-1),ctx.message.author.id))
 									conn1.commit()
 									break
