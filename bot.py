@@ -301,7 +301,7 @@ async def size(ctx):
         row = cursor.fetchone()
         while row is not None:
             if ctx.message.author.id in row:
-                await ctx.message.channel.send("Длина бибы:"+str(row[2])+" Шанс - {1}".format((2/(row[2]+1)*100)))
+                await ctx.message.channel.send("Длина бибы:"+str(row[2])+" Шанс - {1}".format((2/(row[2]+1))*100))
                 break
             row = cursor.fetchone()
     else:
